@@ -1,0 +1,30 @@
+[{
+        "id": "1221760524609902",
+        "hotel_name": "Hook & Irons",
+        "category": "Restaurant",
+        "style": "Party",
+        "city": "Udaipur",
+        "description": "",
+        "image": "https://www.google.co.in/search?q=hook+%26+irons&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi7iLvll_zUAhVHqo8KHXNEBZ8Q_AUIBigB&biw=1366&bih=672#imgrc=38_XDLQlRq77SM:",
+        "lat": 24.5606993,
+        "lng": 73.6911315,
+        "address": "Railway Colony, Zinc Park, Udaipur, Rajasthan 313001",
+        "reviews_comments": "",
+        "budget": "Affordable",
+        "ratings": 4
+    }, {
+        "id": "1221760524609902",
+        "hotel_name": "Swaroop Vilas",
+        "category": "Restaurant",
+        "style": "Romantic",
+        "city": "Udaipur",
+        "description": "",
+        "image": "",
+        "lat": 24.5796029,
+        "lng": 73.686063,
+        "address": "Railway Colony, Zinc Park, Udaipur, Rajasthan 313001",
+        "reviews_comments": "",
+        "budget": "Expensive",
+        "ratings": 5
+    }
+]

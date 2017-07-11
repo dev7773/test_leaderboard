@@ -1,0 +1,124 @@
+th.tablesort-sortable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+table .tablesort-sortable:after{
+    content:"";
+    float:right;
+    margin-top:7px;
+    visibility:hidden;
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+
+    border-top:none;
+    border-bottom:4px solid #000;
+}
+
+table .tablesort-desc:after{
+    border-top:4px solid #000;
+    border-bottom:none;
+}
+
+table .tablesort-asc,table .tablesort-desc{
+    background-color:rgba(141, 192, 219, 0.25);
+}
+
+table .tablesort-sortable:hover:after, table .tablesort-asc:after, table .tablesort-desc:after {
+    visibility:visible;
+}
+
+/*
+ * Styling for the table row shown in empty tables
+ */
+
+/* The row is always added as the first row in a table
+   Hide it by default */
+.showIfLast {
+    display: none;
+}
+
+/* Only show it if it is also the last row of the table. */
+.showIfLast:last-child {
+    display: table-row;
+}
+
+.showIfLast td {
+    text-align: center;
+}
+
+.text-muted {
+    color: #777;
+}
+.pagination__wrapper {
+    width: 400px;
+}
+
+.pagination {
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    padding-left: 20px;
+    li {
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1.2rem;
+        padding: 0 10px;
+        line-height: 30px;
+        border-radius: 2px;
+        text-align: center;
+        &:hover {
+            background-color: #e0dede;
+        }
+        &.chevron {
+            border-radius: 2px;
+        }
+        &.active {
+            background-color: #00BBC6;
+            color: white;
+        }
+    }
+}
+
+.chevron {
+    position: relative;
+    display: block !important;
+    height: 50px;
+    &:before,
+    &:after {
+        position: absolute;
+        display: block !important;
+        content: "";
+        border: 8px solid transparent;
+    }
+    &:before {
+        top: 0;
+        border-top-color: #000;
+    }
+    &:after {
+        top: -4px;
+        border-top-color: #fff;
+    }
+    &.chevron-left {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        left: -18px;
+        top: 11px;
+    }
+    &.chevron-right {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+        top: 27px;
+        right: -18px;
+    }
+}

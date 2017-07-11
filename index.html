@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>leaderboard</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="LeaderBoard">
+    <meta name="keywords" content="ng-map,AngularJS,center">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <!--  A L L  C S S  H E R E -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style1.css">
+    <link rel="stylesheet" type="text/css" href="tablesort.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-glyphicons.css">
+    <!--  ALL SCRIPTS HERE -->
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="custom.js"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDc3wi2mpW6ZAjdACy5KHHLIjbXwqjLvhs&libraries=placeses,visualization,drawing,geometry,places"></script>
+    <script src="https://code.angularjs.org/1.3.15/angular.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <script type="text/javascript" src="angular-tablesort.js"></script>
+    <script type="text/javascript" src="angular-table.js"></script>
+    <script type="text/javascript" src="ui-bootstrap-tpls-2.5.0.min.js"></script>
+</head>
+
+<body ng-controller="myctrl as vm">
+    <div class="right" ng-hide="showDiv">
+        <ng-map center="{{mapcenter}} " on-zoom-changed="zoomChanged() " zoom="{{vm.zoom}} ">
+            <marker ng-repeat="pos in vm.positions|filter:vm.searchText " position="{{pos.lat}}, {{pos.lng}} " icon="{{icons}} " on-mouseover="MshowInfoWindow(pos) " on-click="showdetails(pos) " id='{{pos._id}}'></marker>
+            <info-window id="foo-iw ">
+                <div ng-non-bindable=" ">
+                    <table>
+                        <thead>
+                        </thead>
+                        <tr ng-show="currentType==='location' ">
+                            <div class="row no-padding detail-window " style="margin-bottom: 0 !important; ">
+                                <div style="padding-bottom: 10px; ">
+                                    <div class="box-title ">{{vm.svalue.title}}</div>
+                                    <div>
+                                        <img ng-src="{{vm.svalue.image}} " class="window-img " onerror="this.src='img/no-image-foound.jpg';">
+                                    </div>
+                                    <p class="desc ">{{specificvalue.category}}
+                                    </p>
+                                    <div class="12 " style="text-align: center; ">
+                                        <a type="button " href="https://www.google.com/maps/dir//{{vm.svalue.address}} " target="_blank " class="btn btn-info ">GET
+                                            DIRECTIONS</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+            </info-window>
+            <marker z-index="89888 " ng-repeat="pos in vm.selectedvalue " position="{{pos.lat}}, {{pos.lng}} " ">
+                        </marker>
+                        </ng-map>
+    </div>
+<div class="row right " ng-if="!isEvents ">
+<div class="col-md-4 " ng-repeat="i in currentData ">
+<div class="info-list ">
+    <div class="image-div ">
+    <img src="{{i.image}} " class="image ">
+    </div>
+    <div class="details ">
+    <div class="title-name ">
+        {{i.title}}
+    </div>
+    <div class="ratings ">
+         <i class="fa fa-star "></i>
+         <i class="fa fa-star "></i>
+         <i class="fa fa-star "></i>
+         <i class="fa fa-star "></i>
+         <i class="fa fa-star "></i>
+    </div>
+    <div class="description ">
+        {{i.text | limitTo:100}}
+    </div>
+    </div>
+    </div>
+</div>
+<div class="clearfix "></div>
+</div>
+<div class="left ">
+    <div class="overlay ">
+        <div class="log ">
+            <div class="row ">
+                <div class="col-md-6 log-btns ">
+                    <a class="log-btn " href=" ">LOGIN</a>
+                </div>
+                <div class="col-md-6 log-btns ">
+                    <a class="log-btn-reg " href=" ">REGISTRATION</a>
+                </div>
+            </div>
+        </div>
+       <a class="logo-container " href="index.html " ><img class="logo-icon " src="images/a.png ">
+            <h1 class="logo-text ">LeaderBoard</h1>
+            <h2 class="logo-text subtitle ">Cafe&nbsp;&amp; Restaurant&nbsp;&amp; Bars</h2></a>
+        <!-- logo-container ends here -->
+        <div class="menu-divider "></div>
+        <!-- click for list view -->
+        <a class="view-btn " ng-click="eventDataCome() ">
+            <div class="view-list " ng-if="isEvents ">
+                CLICK FOR LIST VIEW &nbsp;&nbsp; <i class="fa fa-list "></i>
+
+            </div>
+        </a>
+        <!-- click for list view ends -->
+        <!-- click for map view -->
+        <a class="view-btn " ng-click="eventDataCome() ">
+        <div class="view-map " ng-if="isPlaces ">
+            
+            CLICK FOR MAP VIEW &nbsp;&nbsp; <i class="fa fa-map-marker "></i>
+                </div>
+        </a>
+    <!-- click for map view ends -->
+        <!-- search bar -->
+        <div class="form-section ">
+            <form>
+                <input type="text " class="form-control search-bttn " name=" " ng-model="vm.searchText " placeholder="Search for Restaurants, Clubs & Bars ">
+                <div class="filters ">
+                    <select class="form-control drop ">
+                        <option selected hidden=" " >CHOOSE CATEGORY</option>
+                        <option value=" ">Restuarant</option>
+                        <option value=" ">Club</option>
+                        <option value=" ">Bars</option>
+ </select>
+                     <select class="form-control drop ">
+                        <option selected hidden=" ">CHOOSE CITY</option>
+                        <option value=" ">Mumbai</option>
+                        <option value=" ">Jaipur</option>
+                        <option value=" ">Udaipur</option>
+                        <option value=" ">Delhi</option>
+                    </select>
+ <select class="form-control drop ">
+                        <option selected hidden=" ">CHOOSE STYLE</option>
+                        <option value=" ">All</option>
+                        <option value=" ">Romantic</option>
+                        <option value=" ">Party</option>
+</select>
+                    </select>
+ <select class="form-control drop ">
+                        <option selected hidden=" ">CHOOSE RANGE</option>
+                        <option value=" ">All</option>
+                        <option value=" ">Affordable</option>
+                        <option value=" ">Expensive</option>
+
+                    </select>
+</div>
+                <button class="search-click oswald ">SEARCH</button>
+            </form>
+        </div>
+        <div class="search-list " ng-if="!isEvents ">
+            <table>
+                <thead>
+
+                </thead>
+                <tbody>
+                    <!-- <tr ng-repeat="i in currentData "> -->
+                    <tr ng-repeat="i in currentData ">
+
+                        <td class="table-div ">
+                        <hr>
+                            <div class="search-list-view oswald ">
+                                <div class="title ">{{i.title}} </div>
+                                <div class="ratings " >
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+
+                                </div>
+                               <div class="description ">
+                                   {{i.text | limitTo: 100}}
+                                   <div class="time ">
+                                       {{i.start_time}}
+                                   </div>
+                               </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- search bar -->
+        <div class="menu-divider "></div>
+        <footer>
+            <div class="social-icons ">
+                <i class="fa fa-facebook "></i>&emsp;
+                <i class="fa fa-instagram "></i>&emsp;
+                <i class="fa fa-twitter "></i>&emsp;
+                <i class="fa fa-google-plus "></i>
+            </div>
+            <div class="copyright oswald ">
+                &copy; 2017. All Rights Reserved | Developed By <a href="http://innovify.in ">INNOVIFY</a>
+            </div>
+        </footer>
+    </div>
+    <!-- overlay ends here -->
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js " integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa " crossorigin="anonymous "></script>
+<script src="database.js "></script>
+<script src="index.js "></script>
+</body>
+</html>
